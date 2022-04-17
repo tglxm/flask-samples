@@ -3,10 +3,12 @@ from app import app
 from flask import render_template, session
 
 import db
-import users 
+import users
 import todos
+
 app.register_blueprint(users.blueprint)
 app.register_blueprint(todos.blueprint)
+
 
 @app.route('/')
 def index():
@@ -20,6 +22,7 @@ def index():
         items = []
         todos = []
         dones = []
-    return render_template('index.html', hasLogin = hasLogin, todos = todos, dones = dones)
+    return render_template('index.html', hasLogin=hasLogin, todos=todos, dones=dones)
+
 
 app.run()

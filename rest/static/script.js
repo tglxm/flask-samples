@@ -1,10 +1,8 @@
-function ajaxError()
-{
+function ajaxError() {
     alert('ajax error');
 }
 
-function ajaxSuccess(result)
-{
+function ajaxSuccess(result) {
     if (result.error) {
         alert('操作失败');
         return;
@@ -12,13 +10,12 @@ function ajaxSuccess(result)
     location.reload();
 }
 
-function addUser(button)
-{
+function addUser(button) {
     var children = $(button).parent().children();
     var name = children.eq(0).val();
     var phone = children.eq(1).val();
     var data = JSON.stringify({'name': name, 'phone': phone});
-    
+
     $.ajax({
         'url': '/users',
         'type': 'POST',
@@ -30,13 +27,12 @@ function addUser(button)
     });
 }
 
-function updateUser(button, userId)
-{
+function updateUser(button, userId) {
     var children = $(button).parent().children();
     var name = children.eq(0).val();
     var phone = children.eq(1).val();
     var data = JSON.stringify({'name': name, 'phone': phone});
-    
+
     $.ajax({
         'url': '/users/' + userId,
         'type': 'PUT',
@@ -48,11 +44,10 @@ function updateUser(button, userId)
     });
 }
 
-function deleteUser(button, userId)
-{
+function deleteUser(button, userId) {
     var children = $(button).parent().children();
     var data = JSON.stringify({});
-    
+
     $.ajax({
         'url': '/users/' + userId,
         'type': 'DELETE',

@@ -1,7 +1,9 @@
 from flask import Flask, request
+
 app = Flask(__name__)
 
-@app.route('/login', methods = ['GET'])
+
+@app.route('/login', methods=['GET'])
 def login():
     return '''
 <form action="/check_login" method="POST">
@@ -11,7 +13,8 @@ def login():
 </form>
 '''
 
-@app.route('/check_login', methods = ['POST'])
+
+@app.route('/check_login', methods=['POST'])
 def check_login():
     name = request.form['name']
     password = request.form['password']
@@ -19,6 +22,7 @@ def check_login():
         return 'Login succeed'
     else:
         return 'Login failed'
+
 
 if __name__ == '__main__':
     app.run()

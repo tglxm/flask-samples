@@ -4,10 +4,12 @@ import os
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def index():
     entries = os.listdir('./upload')
-    return render_template('index.html', entries = entries)
+    return render_template('index.html', entries=entries)
+
 
 @app.route('/upload', methods=['POST'])
 def upload():
@@ -16,9 +18,10 @@ def upload():
     f.save(path)
     return render_template('upload.html')
 
+
 @app.route('/files/<filename>')
 def files(filename):
     return send_from_directory('./upload', filename, as_attachment=True)
 
-app.run(debug = True)
 
+app.run(debug=True)

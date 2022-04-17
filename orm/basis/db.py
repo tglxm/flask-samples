@@ -12,11 +12,13 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+
 class Student(db.Model):
     __tablename__ = 'students'
     sno = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     age = db.Column(db.Integer)
+
 
 students = Student.query.all()
 for student in students:

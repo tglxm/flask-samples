@@ -1,9 +1,11 @@
 from flask import Flask, render_template
+
 app = Flask(__name__)
+
 
 @app.route('/')
 def index():
-    return render_template('index.html', name = 'tom', age = 10)
+    return render_template('index.html', name='tom', age=10)
 
-app.run(debug = True)
 
+app.run(debug=True)

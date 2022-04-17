@@ -6,16 +6,19 @@ import sys
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(24)
 
+
 class User:
     def __init__(self, name, password, amount):
         self.name = name
         self.password = password
         self.amount = amount
 
+
 users = [
     User('victim', '123', 100),
     User('hacker', '123', 100)
 ]
+
 
 def findUser(name):
     for user in users:
@@ -23,11 +26,13 @@ def findUser(name):
             return user
     return None
 
+
 def checkUser(name, password):
     for user in users:
         if user.name == name and user.password == password:
             return user
     return None
+
 
 @app.route('/')
 def index():
@@ -36,9 +41,10 @@ def index():
     user = findUser(name)
     csrfToken = getCsrfToken()
     session['csrfToken'] = csrfToken
-    return render_template('index.html', hasLogin = hasLogin, user = user, csrfToken = csrfToken)
+    return render_template('index.html', hasLogin=hasLogin, user=user, csrfToken=csrfToken)
 
-@app.route('/login', methods = ['POST'])
+
+@app.route('/login', methods=['POST'])
 def login():
     name = request.form['name']
     password = request.form['password']
@@ -50,21 +56,25 @@ def login():
     else:
         return '登录失败'
 
-@app.route('/logout', methods = ['POST'])
+
+@app.route('/logout', methods=['POST'])
 def logout():
     session['hasLogin'] = False
     session['name'] = None
-    return redirect('/')        
+    return redirect('/')
+
 
 def getCsrfToken():
     return bytes.decode(base64.b64encode(os.urandom(16)))
 
+
 def checkCsrfAttack():
     csrfTokenFromRequest = request.form.get('csrfToken')
     csrfTokenFromSession = session.get('csrfToken')
-    return csrfTokenFromRequest != csrfTokenFromSession    
+    return csrfTokenFromRequest != csrfTokenFromSession
 
-@app.route('/transfer', methods = ['POST'])
+
+@app.route('/transfer', methods=['POST'])
 def transfer():
     if not session.get('hasLogin'):
         return '请先登录'
@@ -87,8 +97,9 @@ def transfer():
     else:
         return '转账失败'
 
+
 checkFlag = False
 if len(sys.argv) == 2 and sys.argv[1] == 'check':
     checkFlag = True
 
-app.run(debug = True, port = 8888)
+app.run(debug=True, port=8888)

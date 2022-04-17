@@ -1,10 +1,8 @@
-function ajaxError()
-{
+function ajaxError() {
     alert('ajax error');
 }
 
-function ajaxSuccess(result)
-{
+function ajaxSuccess(result) {
     if (result.error) {
         alert('操作失败');
         return;
@@ -12,8 +10,7 @@ function ajaxSuccess(result)
     location.reload();
 }
 
-function onAddTodo(button)
-{
+function onAddTodo(button) {
     var children = $(button).parent().children();
     var title = children.eq(0).val();
     var data = JSON.stringify({'title': title});
@@ -29,10 +26,9 @@ function onAddTodo(button)
     });
 }
 
-function onUpdateTodo(todoId) 
-{
+function onUpdateTodo(todoId) {
     var data = JSON.stringify({'todoId': todoId});
-    
+
     $.ajax({
         'url': '/todos/update',
         'type': 'POST',
@@ -44,8 +40,7 @@ function onUpdateTodo(todoId)
     });
 }
 
-function onDeleteTodo(todoId)
-{
+function onDeleteTodo(todoId) {
     var data = JSON.stringify({'todoId': todoId});
 
     $.ajax({
